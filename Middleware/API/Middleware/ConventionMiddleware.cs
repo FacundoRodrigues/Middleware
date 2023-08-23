@@ -1,8 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-
-namespace API.Middleware
+﻿namespace API.Middleware
 {
     public class ConventionMiddleware
     {
