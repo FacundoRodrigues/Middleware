@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Http;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,17 +16,17 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 //Option 1: Adding Middleware With Request Delegates
-app.Use(async (httpContext, next) =>
-{
-    try
-    {
-        await next(httpContext);
-    }
-    catch (Exception ex)
-    {
-        app.Logger.LogError(ex, ex.Message);
-    }
-});
+//app.Use(async (httpContext, next) =>
+//{
+//    try
+//    {
+//        await next(httpContext);
+//    }
+//    catch (Exception ex)
+//    {
+//        app.Logger.LogError(ex, ex.Message);
+//    }
+//});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -40,5 +40,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+//Option 2: Adding Middleware By Convention
+app.UseConventionMiddleware();
 
 app.Run();
